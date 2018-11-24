@@ -1,3 +1,4 @@
-*.xlslx
+*.xlsx
 *.pyc
-
+*.log
+*.pkl

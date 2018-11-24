@@ -43,6 +43,7 @@ import ddd_utils
 import ddd_check_pandas
 import ddd_compare
 import ddd_verify
+import ddd_check_process
 
 
 ''' 
@@ -56,18 +57,6 @@ module_logger = logging.getLogger('ddd_check')
     constantes
 '''
 
-
-
-def verifier_presence_fichier(file_name):
-
-    module_logger.info('verification presence : ' + file_name)
-    
-    if (os.path.isfile(file_name) == False):
-        module_logger.error('verification presence : KO')
-        sys.exit()    
-    else:
-        module_logger.info('verification presence : OK')
-
 def execute():
 
     arguments = docopt(__doc__, version='DDD check 0.1')
@@ -77,8 +66,13 @@ def execute():
     if(arguments['process'] == True):
         module_logger.info('choix : process')
         ddd_xl_file = arguments['<DDD_EXCEL_FILE>']
-        verifier_presence_fichier(ddd_xl_file)
-        print("Process")
+        result = ddd_check_process.verifier_presence_fichier(ddd_xl_file)
+        if (result) :
+            print("Process")
+            module_logger.info('verification presence : OK')
+        else :
+            module_logger.error('verification presence : KO')
+            sys.exit()  
 
     # option debug : travail à partir d'un onglet convertit en format binaire pandas *.pkl
     if(arguments['debug'] == True):
@@ -87,7 +81,7 @@ def execute():
     
         # fichier excel : verification et fabrication chemin
         ddd_pkl_file_path = os.getcwd() + '\\' + arguments['<DDD_PICKLE_FILE>']
-        verifier_presence_fichier(ddd_pkl_file_path)    
+        ddd_check_process.verifier_presence_fichier(ddd_pkl_file_path)    
     
         option_debug = int(arguments['<OPTION_DEBUG>'])
         module_logger.info('choix : debug + option = ' + str(option_debug))
@@ -103,7 +97,7 @@ def execute():
         
         # fichier excel : verification et fabrication chemin
         ddd_xl_file_path = os.getcwd() + '\\' + arguments['<DDD_EXCEL_FILE>']
-        verifier_presence_fichier(ddd_xl_file_path)
+        ddd_check_process.verifier_presence_fichier(ddd_xl_file_path)
 
         # Fabrication chemins
         ddd_pkl_file = arguments['<DDD_PICKLE_FILE>']
@@ -127,13 +121,13 @@ def execute():
         
         # fichier excel 1 : verification
         xl_wb_1_path = os.getcwd() + '\\' + arguments['<CLASSEUR_1>']
-        verifier_presence_fichier(xl_wb_1_path)
+        ddd_check_process.verifier_presence_fichier(xl_wb_1_path)
         xl_wb_1_sheet = arguments['<FEUILLE_1>']
         xl_wb_1_col =  arguments['<COL_1>']
 
         # fichier excel 2 : verification
         xl_wb_2_path = os.getcwd() + '\\' + arguments['<CLASSEUR_2>']
-        verifier_presence_fichier(xl_wb_2_path)
+        ddd_check_process.verifier_presence_fichier(xl_wb_2_path)
         xl_wb_2_sheet = arguments['<FEUILLE_2>']
         xl_wb_2_col =  arguments['<COL_2>']
         
