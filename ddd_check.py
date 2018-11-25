@@ -40,7 +40,7 @@ import sys
 # import des modules
 sys.path.insert(0, './src/')
 import ddd_utils
-import ddd_check_pandas
+import ddd_check_debug
 import ddd_check_compare
 import ddd_check_verify
 import ddd_check_process
@@ -87,7 +87,7 @@ def execute():
         module_logger.info('choix : debug + option = ' + str(option_debug))
         
         if (option_debug == 1):
-            ddd_check_pandas.verifier_io_sheet_stbl(ddd_pkl_file_path)
+            ddd_check_debug.verifier_io_sheet_stbl(ddd_pkl_file_path)
 
     
     
