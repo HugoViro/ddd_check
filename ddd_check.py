@@ -41,7 +41,7 @@ import sys
 sys.path.insert(0, './src/')
 import ddd_utils
 import ddd_check_pandas
-import ddd_compare
+import ddd_check_compare
 import ddd_verify
 import ddd_check_process
 
@@ -131,7 +131,7 @@ def execute():
         xl_wb_2_sheet = arguments['<FEUILLE_2>']
         xl_wb_2_col =  arguments['<COL_2>']
         
-        ddd_compare.comp_wb_sheet_col(int(nb_col_cmp), xl_wb_1_path, xl_wb_1_sheet, int(xl_wb_1_col), xl_wb_2_path, xl_wb_2_sheet, int(xl_wb_2_col))
+        ddd_check_compare.comp_wb_sheet_col(int(nb_col_cmp), xl_wb_1_path, xl_wb_1_sheet, int(xl_wb_1_col), xl_wb_2_path, xl_wb_2_sheet, int(xl_wb_2_col))
     
     
     # option verify : verifier si toutes les données du <CLASSEUR_1> <FEUILLE_1> <COL_1> sont dans les exports au format txt dans <STBL_REP>
