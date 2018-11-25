@@ -150,24 +150,6 @@ def execute():
         ddd_check_verify.process(pkl_stbl_path, stbl_rep_path)
 
 
-    # # Test si presence argument
-    # if (len(sys.argv) != 2):
-        # module_logger.error("ERREUR argument : commande = python.exe ddd_check.py nom_fichier_excel_DDD.xslx")
-        # sys.exit()
-
-    # # Test si fichier existe
-    # source_file = str(list_arg[1])
-    # if (os.path.isfile(source_file) == False):
-        # module_logger.error('ERREUR Fichier : ' + source_file + ' existe pas')
-        # sys.exit()
-
-    # # Fabrication fichier resutlat et chemins
-    # source_path = os.getcwd() + '\\' + source_file
-    # dest_path   = os.getcwd() + '\\' + source_file
-    # dest_path = dest_path[:-5] + '_' + str(time.strftime("_%Y-%m-%d-%H-%M")) + '.xlsx'
-
-    # execution du programme d'analyse
-    # ddd_check_parser.process(source_path, dest_path)
     
     
 def create_logger():
