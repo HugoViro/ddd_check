@@ -109,4 +109,20 @@ def sauvegarder_liste_in_excel_xslx(liste_xl, dest_filename, sheet_name):
     wb.save(filename = dest_filename)
 
     module_logger.info("********************************************************************************")
+
     
+
+'''
+    Verifier la presence d'un fichier et retourne TRUE ou FALSE
+
+'''
+def verifier_presence_fichier(file_name):
+
+    module_logger.info('verification presence : ' + file_name)
+    
+    if (os.path.isfile(file_name) == False):
+        module_logger.error('verification presence : KO')
+        return False   
+    else:
+        module_logger.info('verification presence : OK')
+        return True

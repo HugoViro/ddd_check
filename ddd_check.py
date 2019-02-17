@@ -39,11 +39,11 @@ import sys
 
 # import des modules
 sys.path.insert(0, './src/')
-import ddd_utils
+import ddd_check_process
 import ddd_check_debug
+import ddd_utils
 import ddd_check_compare
 import ddd_check_verify
-import ddd_check_process
 
 
 ''' 
@@ -66,7 +66,7 @@ def execute():
     if(arguments['process'] == True):
         module_logger.info('choix : process')
         ddd_xl_file = arguments['<DDD_EXCEL_FILE>']
-        result = ddd_check_process.verifier_presence_fichier(ddd_xl_file)
+        result = ddd_check_utils.verifier_presence_fichier(ddd_xl_file)
         if (result) :
             print("Process")
             module_logger.info('verification presence : OK')
@@ -81,7 +81,7 @@ def execute():
     
         # fichier excel : verification et fabrication chemin
         ddd_pkl_file_path = os.getcwd() + '\\' + arguments['<DDD_PICKLE_FILE>']
-        ddd_check_process.verifier_presence_fichier(ddd_pkl_file_path)    
+        ddd_check_utils.verifier_presence_fichier(ddd_pkl_file_path)    
     
         option_debug = int(arguments['<OPTION_DEBUG>'])
         module_logger.info('choix : debug + option = ' + str(option_debug))
@@ -97,17 +97,21 @@ def execute():
         
         # fichier excel : verification et fabrication chemin
         ddd_xl_file_path = os.getcwd() + '\\' + arguments['<DDD_EXCEL_FILE>']
-        ddd_check_process.verifier_presence_fichier(ddd_xl_file_path)
+        result = ddd_check_utils.verifier_presence_fichier(ddd_xl_file_path)
+        
+        if (result) :
+            module_logger.info('verification presence : OK')
 
-        # Fabrication chemins
-        ddd_pkl_file = arguments['<DDD_PICKLE_FILE>']
-        ddd_pkl_file_path = os.getcwd() + '\\' + ddd_pkl_file
-        
-        ddd_pkl_sheet = arguments['<DDD_EXCEL_SHEET>']
-        
-        ddd_utils.generate_pkl_from_excel(ddd_xl_file_path, ddd_pkl_sheet, ddd_pkl_file_path)
-        
-        ddd_utils.lire_pkl(ddd_pkl_file_path)
+            # Fabrication chemins
+            ddd_pkl_file_path = os.getcwd() + '\\' + arguments['<DDD_PICKLE_FILE>']
+            ddd_pkl_sheet = arguments['<DDD_EXCEL_SHEET>']
+            
+            # appel du module de generation du fichier pkl pandas
+            # ddd_check_generate.process(ddd_xl_file_path, ddd_pkl_sheet, ddd_pkl_file_path)
+        else :
+            module_logger.error('verification presence : KO')
+            sys.exit()  
+
 
         
         
@@ -121,13 +125,13 @@ def execute():
         
         # fichier excel 1 : verification
         xl_wb_1_path = os.getcwd() + '\\' + arguments['<CLASSEUR_1>']
-        ddd_check_process.verifier_presence_fichier(xl_wb_1_path)
+        ddd_check_utils.verifier_presence_fichier(xl_wb_1_path)
         xl_wb_1_sheet = arguments['<FEUILLE_1>']
         xl_wb_1_col =  arguments['<COL_1>']
 
         # fichier excel 2 : verification
         xl_wb_2_path = os.getcwd() + '\\' + arguments['<CLASSEUR_2>']
-        ddd_check_process.verifier_presence_fichier(xl_wb_2_path)
+        ddd_check_utils.verifier_presence_fichier(xl_wb_2_path)
         xl_wb_2_sheet = arguments['<FEUILLE_2>']
         xl_wb_2_col =  arguments['<COL_2>']
         
